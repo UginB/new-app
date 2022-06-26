@@ -1,0 +1,16 @@
+footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 83px;
+	background: #F8F8F8;
+}
+
+.footer__cr {
+	font-family: 'Playfair Display';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	text-align: center;
+	color: #949494;
+}

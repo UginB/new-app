@@ -1,0 +1,58 @@
+.header {
+	margin: 32px auto 0 auto;
+	max-width: 1180px;
+	position: relative;
+	height: 37px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header__logo {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 103px;
+	height: 21px;	
+	font-family: 'Playfair Display';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 21px;
+	color: black;
+}
+
+.header__logo__scqr {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 56px;
+	height: 37px;
+	background: #121221;
+	border-radius: 4px;
+	color: #F8F8F8;
+}
+
+.header__rightSide {
+	display: flex;
+}
+
+.header__search {
+	cursor: pointer;
+	margin: 0 32px 0 0;
+}
+
+.header__burger {
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 22.97px;
+	height: 20.72px;
+}
+
+.header__burger div {
+	height: 2px;
+	width: 22.97px;
+	background: #000000;
+}
