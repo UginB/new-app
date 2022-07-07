@@ -1,12 +1,19 @@
+import { useEffect } from 'react';
+
 import './LastestNews.css';
 
 const LastestNews = () => {
+
+	// useEffect(() => {
+	// 	console.log('hello LastNews')
+	// }, []);
+
 	return (
 		<section className="latestNews">
 			<h2 className="latestNews__title">Latest News</h2>
 			<div className="latestNews__content">
 				<div className="newsItem">
-					<img src="%PUBLIC_URL%/news_bg.jpg" alt="newz" className="newsItem__img"/>
+					{/* <img src="%PUBLIC_URL%/news_bg.jpg" alt="newz" className="newsItem__img"/> */}
 					<h3 className="newsItem__title">
 						News Title Lorem Ipsum Dolor Sit Amet
 					</h3>

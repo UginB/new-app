@@ -1,26 +1,75 @@
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+
+import NewsService from '../../services/NewsService';
+
+import './HotTopic.css'
+
 const HotTopic = () => {
+	const [topNews, setTopNews] = useState({});
+	const {getOneHotTopicNews, clearError, process, setProcess} = NewsService();
+
+	useEffect(() => {
+		updateNews();
+	}, []);
+
+	const onNewsLoaded = (news) => {
+		setTopNews(news);
+	}
+
+	// const updateNews = () => {
+	// 	clearError();
+	// 	getOneHotTopicNews()
+	// 		.then(console.log);
+	// }
+
+	const updateNews = () => {
+		clearError();
+		getOneHotTopicNews()
+			.then(onNewsLoaded)
+			.then(() => setProcess('confirmed'));
+	}
+
 	return (
 		<section className="hotTopics">
-					<h1 className="hotTopics__title">
-						Hot Topics
-					</h1>
-					<div className="topicItem">
-						<img src="%PUBLIC_URL%/news_bg.jpg" className="topicItem__img" alt="news picture"/>
-						<div className="topicItem__left">
-						<h3 className="topicItem__title">
-							Massa tortor nibh nulla condimentum imperdiet scelerisque...
-						</h3>
-						<div className="timeAndSource">
-							<div className="timeAndSource__time">2 Hours Ago</div>
-							<div className="timeAndSource__source">CNN Indonesia</div>
-						</div>
-					</div>
-					<div className="topicItem__text">
-						<span>Nisi</span>, sagittis aliquet sit rutrum. Nunc, id vestibulum quam ornare adipiscing. Pellentesque sed turpis nunc gravida pharetra, sit nec vivamus pharetra. Velit, dui, egestas nisi, elementum mattis mauris, magnis. Massa tortor nibh nulla condimentum imperdiet scelerisque... <a href="#" className="topicItem__link">read more</a>
-					</div>
-				</div>
+			<h1 className="hotTopics__title">
+				Hot Topics
+			</h1>
+			<View data={topNews}/>
 		</section>
 	)
+}
+
+const View = ({data}) => {
+	const {title, description, image_url, pubDate, creator} = data;
+
+	return(
+		<div className="topicItem">
+			<div 
+				className="topicItem__img" 
+				alt={title}
+				style={{
+					backgroundImage: `url(${image_url})`,
+					backgroundSize: 'cover',
+					backgroundRepeat: 'no-repeat'
+				}}>
+				<h3 className="topicItem__title">
+					{title}
+				</h3>
+				<div className="timeAndSource">
+					<div className="timeAndSource__time">
+						{pubDate}
+					</div>
+					<div className="timeAndSource__source">
+						{creator}
+					</div>
+				</div>
+			</div>
+			<div className="topicItem__text">
+				{description}
+			</div>
+		</div>
+	);
 }
 
 export default HotTopic;
