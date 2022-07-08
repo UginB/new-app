@@ -18,17 +18,28 @@
 	border-radius: 8px;
 }
 
-.topicItem:hover {
+/* .topicItem:hover {
 	background-color: rgb(238, 243, 255);
-}
+} */
 
-.topicItem__img {
+.topicItem__left {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	padding: 32px 32px;
 	width: 870px;
+}
+
+.topicItem__img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	border-radius: 8px;
+	z-index: -999;
+	filter: brightness(60%)
 }
 
 .timeAndSource {

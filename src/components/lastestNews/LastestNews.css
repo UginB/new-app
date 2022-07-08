@@ -3,7 +3,7 @@
 }
 
 .latestNews__content {
-	padding-top: 24px;
+	padding: 24px 0 0 0;
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 270px);
@@ -21,6 +21,7 @@
 }
 
 .newsItem {
+	position: relative;
 	cursor: pointer;
 	display: flex;
 	flex-direction: column;
@@ -34,7 +35,7 @@
 }
 
 .newsItem__title {
-	margin: 16px 0 24px 0;
+	margin: 192px 0 24px 0;
 	font-family: 'Playfair Display';
 	font-style: normal;
 	font-weight: 700;
@@ -44,7 +45,9 @@
 }
 
 .newsItem__img {
+	position: absolute;
 	width: 270px;
 	height: 176px;
 	border-radius: 8px;
+	object-fit: cover;
 }

@@ -7,7 +7,7 @@ import './HotTopic.css'
 
 const HotTopic = () => {
 	const [topNews, setTopNews] = useState({});
-	const {getOneHotTopicNews, clearError, process, setProcess} = NewsService();
+	const {getTopHeadline, clearError, process, setProcess} = NewsService();
 
 	useEffect(() => {
 		updateNews();
@@ -25,7 +25,7 @@ const HotTopic = () => {
 
 	const updateNews = () => {
 		clearError();
-		getOneHotTopicNews()
+		getTopHeadline()
 			.then(onNewsLoaded)
 			.then(() => setProcess('confirmed'));
 	}
@@ -41,27 +41,27 @@ const HotTopic = () => {
 }
 
 const View = ({data}) => {
-	const {title, description, image_url, pubDate, creator} = data;
+	const {author, content, description, publishedAt, source, title, url, urlToImage} = data;
 
 	return(
 		<div className="topicItem">
-			<div 
-				className="topicItem__img" 
+			<div className="topicItem__left">
+				<div className="topicItem__img" 
 				alt={title}
 				style={{
-					backgroundImage: `url(${image_url})`,
+					backgroundImage: `url(${urlToImage})`,
 					backgroundSize: 'cover',
 					backgroundRepeat: 'no-repeat'
-				}}>
+				}}/>
 				<h3 className="topicItem__title">
 					{title}
 				</h3>
 				<div className="timeAndSource">
 					<div className="timeAndSource__time">
-						{pubDate}
+						{publishedAt}
 					</div>
 					<div className="timeAndSource__source">
-						{creator}
+						{author}
 					</div>
 				</div>
 			</div>

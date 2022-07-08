@@ -3,42 +3,41 @@ import {useHttp} from '../hooks/http.hook';
 const useNewsService = () => {
 	const {request, clearError, process, setProcess} = useHttp();
 
-    const _apiBase = 'https://cors-anywhere.herokuapp.com/https://newsdata.io/api/1/news?';
-	const _apiKey = 'apikey=pub_8695512678a20c513a02cd6dd17bd3333600';
-	const _country = '&country=ru';
-    const _category = '&category=sports';
-	const _lang = '&language=';
-	const q = '&q=social%20AND%20pizza';
-	const _page = '&page=';
+	const _apiBase = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/';
+	const _apiKey = 'ca7b227040a64e36bcc5fbbe4defc5c9';
 
-	const getOneHotTopicNews = async (page = '1', lang = 'ru') => {
-        const res = await request(`${_apiBase}${_apiKey}${_lang}${lang}${_page}${page}`);
-		// console.log(res.results[0])
-        return _transformData(res.results[0]);
+	const getTopHeadline = async (country = 'us') => {
+        const res = await request(`${_apiBase}top-headlines?country=${country}&apiKey=${_apiKey}`);
+		console.log(res)
+        return _transformData(res.articles[0]);
+    }
+
+	const getTopHeadlines = async (country = 'us') => {
+        const res = await request(`${_apiBase}top-headlines?country=${country}&apiKey=${_apiKey}`);
+		console.log(res.articles)
+        return res.articles;
     }
 
 	const _transformData = (data) => {
-
 		return {
-			title: data.title,
-			link: data.link,
-			keywords:  (data.keywords !== null) ? data.keywords.join(', ') : 'Ключевые слова не указаны',
-			creator: (data.creator !== null) ? data.creator.join(', ') : 'Автор не указан',
+			author: data.author,
+			content: data.content,
 			description: data.description,
-			pubDate: data.pubDate,
-			image_url: data.image_url,
-			country: data.country.join(', '),
-			category: data.category.join(', '),
-			language: data.language
+			publishedAt: data.publishedAt,
+			source: data.source.name,
+			title: data.title,
+			url: data.url,
+			urlToImage: data.urlToImage
 		}
 	}
 
-	// https://gateway.marvel.com:443/v1/public/characters?limit=9&offset=210&apikey=f11ae0ce1869fe40b587867e296d143a
+
 	return {
 		clearError, 
 		process, 
 		setProcess,
-		getOneHotTopicNews
+		getTopHeadline,
+		getTopHeadlines
 	}
 }
 
