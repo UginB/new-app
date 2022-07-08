@@ -1,0 +1,24 @@
+.singlePage {
+	display: block;
+	position: relative;
+}
+
+.singlePage__img {
+	position: absolute;
+	height: 200px;
+	width: 300px;
+	object-fit: cover;
+	border-radius: 8px;
+}
+
+.singlePage__title {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 850px;
+	font-size: 36px;
+}
+
+.singlePage__content {
+	padding-top: 230px;
+}

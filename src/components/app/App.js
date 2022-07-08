@@ -1,4 +1,4 @@
-import { lazy, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import AppHeader from '../appHeader/AppHeader';
@@ -10,20 +10,16 @@ const MainPage = lazy(() => import('../mainPage/MainPage'));
 const SinglePage = lazy(() => import('../singlePage/SinglePage'));
 
 const App = () => {
-	// const [selectedArticle, setSelectedArticle] = useState({})
-
-	// const onArticleSelected = (id) => {
-    //     setSelectedArticle(id);
-    // }
-
 	return (
 		<Router>
 			<AppHeader/>
 			<main className="main">
-				<Routes>
-					<Route exact path='/' element={<MainPage/>}/>
-					<Route exact path='/article/:articleId' element={<SinglePage/>}/>
-				</Routes>
+				<Suspense fallback={'Загрузка'}>
+					<Routes>
+						<Route exact path='/' element={<MainPage/>}/>
+						<Route exact path='/article/:articleId' element={<SinglePage/>}/>
+					</Routes>
+				</Suspense>
 			</main>
 			<AppFooter/>
 		</Router>

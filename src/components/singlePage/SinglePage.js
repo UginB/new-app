@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import NewsService from '../../services/NewsService';
 
 import noImg from '../../resources/img/no-img.jpg';
+import './SinglePage.css';
 
 const SinglePage= () => {
 	const {articleId} = useParams();
@@ -29,21 +30,20 @@ const SinglePage= () => {
     }
 
 	return (
-		<div>
+		<div className="singlePage">
 			<img src={
-				(!article.urlToImage) ? noImg : article.urlToImage
+					(!article.urlToImage) ? noImg : article.urlToImage
 				} 
 				alt={article.title}
-				className="newsItem__img"/>
-					<h3 className="newsItem__title">
+				className="singlePage__img"/>
+					<h3 className="singlePage__title">
 						{article.title}
 					</h3>
-					<p>
+					<p className='singlePage__content'>
 						{ 
 						(!article.content) ? article.description : article.content
 						}
 					</p>
-			
 		</div>
 	);
 }

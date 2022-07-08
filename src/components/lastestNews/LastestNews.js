@@ -1,13 +1,12 @@
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 
 import NewsService from '../../services/NewsService';
 
-import noImg from '../../resources/img/no-img.jpg'
+import noImg from '../../resources/img/no-img.jpg';
 import './LastestNews.css';
 
 const LastestNews = () => {
-
 	const [newsList, setNewsList] = useState([]);
 	const [imgLoad, setImgLoad] = useState(true);
 
@@ -50,7 +49,7 @@ const LastestNews = () => {
 									alt={item.title}
 									className="newsItem__img"/>
 								<h3 className="newsItem__title">
-									{(item.title.length > 69) ? `${item.title.substr(0, 55)}...` : item.title}
+									{(item.title.length > 45) ? `${item.title.substr(0, 40)}...` : item.title}
 								</h3>
 								<div className="timeAndSource timeAndSource_grey">
 									<div className="timeAndSource__time">{item.publishedAt}</div>

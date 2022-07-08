@@ -1,5 +1,7 @@
 import './AppHeader.css';
 
+import union from '../../resources/img/union.svg'
+
 const AppHeader = () => {
 	return (
 		<header className="header">
@@ -11,7 +13,7 @@ const AppHeader = () => {
 			</div>
 			<div className="header__rightSide">
 				<div className="header__search">
-					<img className="header__search__img" src="./Union.svg" alt="search"/>
+					<img className="header__search__img" src={union} alt="search"/>
 				</div>
 				<div className="header__burger">
 					<div></div>
