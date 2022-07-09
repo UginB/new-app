@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 
-import NewsService from '../../services/NewsService';
+import useNewsService from '../../services/NewsService';
 
 import noImg from '../../resources/img/no-img.jpg';
 import './LastestNews.css';
@@ -10,7 +10,7 @@ const LastestNews = () => {
 	const [newsList, setNewsList] = useState([]);
 	const [imgLoad, setImgLoad] = useState(true);
 
-	const {getTopHeadlines, clearError, process, setProcess} = NewsService();
+	const {getTopHeadlines, clearError, process, setProcess} = useNewsService();
 
 	useEffect(() => {
 		updateNewsList();
@@ -43,13 +43,20 @@ const LastestNews = () => {
 						className="newsItem"
 						key={i}>
 							<Link to={`/article/${i}`}>
-								<img src={
-									(!item.urlToImage) ? noImg : item.urlToImage
+								<img 
+									onError={() => {
+										const fixNewsList = [...newsList]
+										fixNewsList[i].urlToImage = noImg;
+										setNewsList(fixNewsList)
+									}}
+									src={
+									(item.urlToImage) ? item.urlToImage : noImg
 									} 
+									
 									alt={item.title}
 									className="newsItem__img"/>
 								<h3 className="newsItem__title">
-									{(item.title.length > 45) ? `${item.title.substr(0, 40)}...` : item.title}
+									{(item.title.length > 40) ? `${item.title.substr(0, 35)}...` : item.title}
 								</h3>
 								<div className="timeAndSource timeAndSource_grey">
 									<div className="timeAndSource__time">{item.publishedAt}</div>

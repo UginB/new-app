@@ -1,23 +1,26 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import AppHeader from '../appHeader/AppHeader';
 import AppFooter from '../appFooter/AppFooter';
 
 import './App.css';
+import 'animate.css';
 
 const MainPage = lazy(() => import('../mainPage/MainPage'));
 const SinglePage = lazy(() => import('../singlePage/SinglePage'));
 
 const App = () => {
+	const [searchValue, setSearchValue] = useState({});
+
 	return (
 		<Router>
-			<AppHeader/>
+			<AppHeader setSearchValue={setSearchValue}/>
 			<main className="main">
 				<Suspense fallback={'Загрузка'}>
 					<Routes>
 						<Route exact path='/' element={<MainPage/>}/>
-						<Route exact path='/article/:articleId' element={<SinglePage/>}/>
+						<Route exact path='/article/:articleId' element={<SinglePage searchValue={searchValue}/>}/>
 					</Routes>
 				</Suspense>
 			</main>

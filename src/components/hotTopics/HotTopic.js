@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import NewsService from '../../services/NewsService';
+import useNewsService from '../../services/NewsService';
 
+import noImg from '../../resources/img/no-img.jpg';
 import './HotTopic.css'
 
 const HotTopic = () => {
 	const [topNews, setTopNews] = useState({});
-	const {getTopHeadline, clearError, process, setProcess} = NewsService();
+	const {getTopHeadline, clearError, process, setProcess} = useNewsService();
 
 	useEffect(() => {
 		updateNews();
@@ -43,9 +44,21 @@ const HotTopic = () => {
 const View = ({data}) => {
 	const {author, content, description, publishedAt, source, title, url, urlToImage} = data;
 
+	let ImgUrl = urlToImage;
+
 	return(
 		<div className="topicItem">
 			<div className="topicItem__left">
+				<img
+					className="topicItem__img"
+					onError={() => {
+						ImgUrl = noImg;
+					}}
+					alt={title}
+					src={
+						(ImgUrl) ? ImgUrl : noImg
+					}
+					/>
 				<div className="topicItem__img" 
 				alt={title}
 				style={{

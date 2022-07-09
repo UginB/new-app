@@ -18,6 +18,12 @@ const useNewsService = () => {
         return res.articles;
     }
 
+	const getSearchRequest = async (value) => {
+        const res = await request(`${_apiBase}everything?q=${value}&sortBy=popularity&pageSize=10&apiKey=${_apiKey}`);
+		console.log(res)
+        return res;
+	}
+
 	const _transformData = (data) => {
 		return {
 			author: data.author,
@@ -37,7 +43,8 @@ const useNewsService = () => {
 		process, 
 		setProcess,
 		getTopHeadline,
-		getTopHeadlines
+		getTopHeadlines,
+		getSearchRequest
 	}
 }
 
