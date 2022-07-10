@@ -11,7 +11,7 @@ const MainPage = lazy(() => import('../mainPage/MainPage'));
 const SinglePage = lazy(() => import('../singlePage/SinglePage'));
 
 const App = () => {
-	const [searchValue, setSearchValue] = useState({});
+	const [searchValue, setSearchValue] = useState([]);
 
 	return (
 		<Router>
@@ -19,7 +19,7 @@ const App = () => {
 			<main className="main">
 				<Suspense fallback={'Загрузка'}>
 					<Routes>
-						<Route exact path='/' element={<MainPage/>}/>
+						{/* <Route exact path='/' element={<MainPage/>}/> */}
 						<Route exact path='/article/:articleId' element={<SinglePage searchValue={searchValue}/>}/>
 					</Routes>
 				</Suspense>

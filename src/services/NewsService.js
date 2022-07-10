@@ -20,8 +20,8 @@ const useNewsService = () => {
 
 	const getSearchRequest = async (value) => {
         const res = await request(`${_apiBase}everything?q=${value}&sortBy=popularity&pageSize=10&apiKey=${_apiKey}`);
-		console.log(res)
-        return res;
+		console.log(res.articles)
+        return res.articles;
 	}
 
 	const _transformData = (data) => {

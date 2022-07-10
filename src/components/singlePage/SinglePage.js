@@ -6,16 +6,22 @@ import NewsService from '../../services/NewsService';
 import noImg from '../../resources/img/no-img.jpg';
 import './SinglePage.css';
 
-const SinglePage= () => {
+const SinglePage = (props) => {
 	const {articleId} = useParams();
 	const [article, setArticle] = useState({});
+
+	const [arrSearch, setArrSearch] = useState([])
 
 	const {getTopHeadlines, clearError, process, setProcess} = NewsService();
 
 	useEffect(() => {
-        updateArticle();
+        // updateArticle();
         // eslint-disable-next-line
-    }, [articleId]);
+		// setArrSearch(props.searchValue)
+		setArticle(props.searchValue[articleId])
+    }, [
+		// articleId
+	]);
 
     const updateArticle = () => {
         clearError();

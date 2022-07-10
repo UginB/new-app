@@ -1,7 +1,7 @@
 import HotTopic from "../hotTopics/HotTopic";
 import LastestNews from "../lastestNews/LastestNews";
 
-const MainPage= () => {
+const MainPage= (props) => {
 	return (
 		<>
 			<HotTopic/>
