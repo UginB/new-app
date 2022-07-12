@@ -19,7 +19,7 @@ const App = () => {
 			<main className="main">
 				<Suspense fallback={'Загрузка'}>
 					<Routes>
-						{/* <Route exact path='/' element={<MainPage/>}/> */}
+						<Route exact path='/' element={<MainPage/>}/>
 						<Route exact path='/article/:articleId' element={<SinglePage searchValue={searchValue}/>}/>
 					</Routes>
 				</Suspense>

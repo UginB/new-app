@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 import useNewsService from '../../services/NewsService';
 
@@ -7,8 +9,10 @@ import noImg from '../../resources/img/no-img.jpg';
 import './LastestNews.css';
 
 const LastestNews = () => {
+	// const {articlesMainPage, articlesMainPageLoadStatus} = useSelector(state => state);
+    // const dispatch = useDispatch();
+
 	const [newsList, setNewsList] = useState([]);
-	const [imgLoad, setImgLoad] = useState(true);
 
 	const {getTopHeadlines, clearError, process, setProcess} = useNewsService();
 
@@ -19,12 +23,6 @@ const LastestNews = () => {
 	const onNewsListLoaded = (news) => {
 		setNewsList(news);
 	}
-
-	// const updateNews = () => {
-	// 	clearError();
-	// 	getOneHotTopicNews()
-	// 		.then(console.log);
-	// }
 
 	const updateNewsList = () => {
 		clearError();

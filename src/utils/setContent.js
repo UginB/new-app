@@ -1,7 +1,7 @@
 const setContent = (process, Component, data) => {
     switch(process) {
         case 'waiting':
-            return console.log('waiting')>;
+            return console.log('waiting');
         case 'loading':
             return console.log('loading');
         case 'confirmed':
