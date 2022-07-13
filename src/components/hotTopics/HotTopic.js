@@ -1,35 +1,15 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-
-import useNewsService from '../../services/NewsService';
+// import styled from 'styled-components';
 
 import noImg from '../../resources/img/no-img.jpg';
 import './HotTopic.css'
 
-const HotTopic = () => {
+const HotTopic = (props) => {
 	const [topNews, setTopNews] = useState({});
-	const {getTopHeadline, clearError, process, setProcess} = useNewsService();
 
 	useEffect(() => {
-		updateNews();
+		setTopNews(props.data[0])
 	}, []);
-
-	const onNewsLoaded = (news) => {
-		setTopNews(news);
-	}
-
-	// const updateNews = () => {
-	// 	clearError();
-	// 	getOneHotTopicNews()
-	// 		.then(console.log);
-	// }
-
-	const updateNews = () => {
-		clearError();
-		getTopHeadline()
-			.then(onNewsLoaded)
-			.then(() => setProcess('confirmed'));
-	}
 
 	return (
 		<section className="hotTopics">
@@ -42,7 +22,15 @@ const HotTopic = () => {
 }
 
 const View = ({data}) => {
-	const {author, content, description, publishedAt, source, title, url, urlToImage} = data;
+	const {
+		// author, 
+		// content, 
+		// description, 
+		// publishedAt, 
+		// source, 
+		title, 
+		// url, 
+		urlToImage} = data;
 
 	let ImgUrl = urlToImage;
 
@@ -71,15 +59,15 @@ const View = ({data}) => {
 				</h3>
 				<div className="timeAndSource">
 					<div className="timeAndSource__time">
-						{publishedAt}
+						{/* {publishedAt} */}
 					</div>
 					<div className="timeAndSource__source">
-						{author}
+						{/* {author} */}
 					</div>
 				</div>
 			</div>
 			<div className="topicItem__text">
-				{description}
+				{/* {description} */}
 			</div>
 		</div>
 	);

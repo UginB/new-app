@@ -1,40 +1,18 @@
 import { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-
-import useNewsService from '../../services/NewsService';
+import { Link } from 'react-router-dom';
 
 import noImg from '../../resources/img/no-img.jpg';
 import './LastestNews.css';
 
-const LastestNews = () => {
-	// const {articlesMainPage, articlesMainPageLoadStatus} = useSelector(state => state);
-    // const dispatch = useDispatch();
-
+const LastestNews = (props) => {
 	const [newsList, setNewsList] = useState([]);
 
-	const {getTopHeadlines, clearError, process, setProcess} = useNewsService();
-
 	useEffect(() => {
-		updateNewsList();
+		setNewsList(props.data);
 	}, []);
 
-	const onNewsListLoaded = (news) => {
-		setNewsList(news);
-	}
-
-	const updateNewsList = () => {
-		clearError();
-		getTopHeadlines()
-			.then(onNewsListLoaded)
-			.then(() => setProcess('confirmed'));
-	}
-
 	const renderNewsList = (arr) => {
-
 		const items =  arr.map((item, i) => {
-			
             if (i !== 0) {
 				return (
 					<li 
@@ -73,25 +51,12 @@ const LastestNews = () => {
         )
 	}
 
-
 	return (
 		<section className="latestNews">
 			<h2 className="latestNews__title">Latest News</h2>
 
 			{renderNewsList(newsList)}
 
-			{/* <div className="latestNews__content">
-				<div className="newsItem">
-					<img src="%PUBLIC_URL%/news_bg.jpg" alt="newz" className="newsItem__img"/>
-					<h3 className="newsItem__title">
-						News Title Lorem Ipsum Dolor Sit Amet
-					</h3>
-					<div className="timeAndSource timeAndSource_grey">
-						<div className="timeAndSource__time">2 Hours Ago</div>
-						<div className="timeAndSource__source">CNN Indonesia</div>
-					</div>
-				</div>
-			</div> */}
 		</section>
 	)
 }

@@ -1,5 +1,7 @@
 import { lazy, Suspense, useState } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { Provider } from 'react-redux';
+import store from '../../store/';
 
 import AppHeader from '../appHeader/AppHeader';
 import AppFooter from '../appFooter/AppFooter';
@@ -14,18 +16,20 @@ const App = () => {
 	const [searchValue, setSearchValue] = useState([]);
 
 	return (
-		<Router>
-			<AppHeader setSearchValue={setSearchValue}/>
-			<main className="main">
-				<Suspense fallback={'Загрузка'}>
-					<Routes>
-						<Route exact path='/' element={<MainPage/>}/>
-						<Route exact path='/article/:articleId' element={<SinglePage searchValue={searchValue}/>}/>
-					</Routes>
-				</Suspense>
-			</main>
-			<AppFooter/>
-		</Router>
+		<Provider store={store}>
+			<Router>
+				<AppHeader setSearchValue={setSearchValue}/>
+				<main className="main">
+					<Suspense fallback={'Загрузка'}>
+						<Routes>
+							<Route exact path='/' element={<MainPage/>}/>
+							<Route exact path='/article/:articleId' element={<SinglePage searchValue={searchValue}/>}/>
+						</Routes>
+					</Suspense>
+				</main>
+				<AppFooter/>
+			</Router>
+		</Provider>
 	);
 }
 
