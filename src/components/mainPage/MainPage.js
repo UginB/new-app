@@ -6,23 +6,27 @@ import {mainArticlesFetching, mainArticlesFetched, mainArticlesFetchingError} fr
 import useNewsService from '../../services/NewsService';
 
 const MainPage = () => {
-	const {articlesMainPage, 
-		// articlesMainPageLoadStatus
-	} = useSelector(state => state);
     const dispatch = useDispatch();
 	const {getTopHeadlines} = useNewsService();
+
+	const {articlesMainPageLoadStatus} = useSelector(state => state);
 
 	useEffect(() => {
 		dispatch(mainArticlesFetching());
 		getTopHeadlines()
 			.then(data => dispatch(mainArticlesFetched(data)))
-			.then(() => dispatch(mainArticlesFetchingError()))
+			.catch(() => dispatch(mainArticlesFetchingError()));
 	}, []);
 
 	return (
 		<>
-			<HotTopic data={articlesMainPage}/>
-			<LastestNews data={articlesMainPage}/>
+			{
+				(articlesMainPageLoadStatus !== 'loading')?
+				<>
+					<HotTopic/>
+					<LastestNews/>
+				</> : 'Загрузка'
+			}
 		</>
 	);
 }

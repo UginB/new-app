@@ -1,4 +1,5 @@
 import {useHttp} from '../hooks/http.hook';
+import nextId from 'react-id-generator/';
 
 const useNewsService = () => {
 	const {request} = useHttp();
@@ -8,28 +9,21 @@ const useNewsService = () => {
 
 	const getTopHeadlines = async (country = 'us') => {
         const res = await request(`${_apiBase}top-headlines?country=${country}&apiKey=${_apiKey}`);
-		console.log(res.articles)
-        return res.articles;
+		console.log(_transformData(res.articles))
+        return _transformData(res.articles);
     }
 
 	const getSearchRequest = async (value) => {
         const res = await request(`${_apiBase}everything?q=${value}&sortBy=popularity&pageSize=10&apiKey=${_apiKey}`);
-		console.log(res.articles)
-        return res.articles;
+		console.log(_transformData(res.articles))
+        return _transformData(res.articles);
 	}
 
-	// const _transformData = (data) => {
-	// 	return {
-	// 		author: data.author,
-	// 		content: data.content,
-	// 		description: data.description,
-	// 		publishedAt: data.publishedAt,
-	// 		source: data.source.name,
-	// 		title: data.title,
-	// 		url: data.url,
-	// 		urlToImage: data.urlToImage
-	// 	}
-	// }
+	const _transformData = (data) => {
+		return data.map(item => {
+			return {...item, id : nextId()}
+		})
+	}
 
 	return {
 		getTopHeadlines,

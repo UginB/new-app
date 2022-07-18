@@ -3,7 +3,6 @@ const initialState = {
 	articlesSearchResult: [],
     articlesMainPageLoadStatus: 'idle',
 	articlesSearchLoadStatus: 'idle',
-	singlePage: {},
     currentFilter: 'all'
 }
 

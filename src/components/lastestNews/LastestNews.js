@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import noImg from '../../resources/img/no-img.jpg';
 import './LastestNews.css';
 
-const LastestNews = (props) => {
+const LastestNews = () => {
 	const [newsList, setNewsList] = useState([]);
+	const {articlesMainPage} = useSelector(state => state);
 
 	useEffect(() => {
-		setNewsList(props.data);
+		setNewsList(articlesMainPage);
 	}, []);
 
 	const renderNewsList = (arr) => {
@@ -17,8 +19,8 @@ const LastestNews = (props) => {
 				return (
 					<li 
 						className="newsItem"
-						key={i}>
-							<Link to={`/article/${i}`}>
+						key={item.id}>
+							<Link to={`/article/${item.id}`}>
 								<img 
 									onError={() => {
 										const fixNewsList = [...newsList]
@@ -51,11 +53,13 @@ const LastestNews = (props) => {
         )
 	}
 
+	const renderList = renderNewsList(newsList);
+
 	return (
 		<section className="latestNews">
 			<h2 className="latestNews__title">Latest News</h2>
 
-			{renderNewsList(newsList)}
+			{renderList}
 
 		</section>
 	)

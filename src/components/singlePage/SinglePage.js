@@ -1,39 +1,28 @@
 import {useParams} from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
-import NewsService from '../../services/NewsService';
+import { useSelector } from 'react-redux';
 
 import noImg from '../../resources/img/no-img.jpg';
 import './SinglePage.css';
 
-const SinglePage = (props) => {
+const SinglePage = () => {
 	const {articleId} = useParams();
+	const [articlesArr, setArticlesArr] = useState([]);
 	const [article, setArticle] = useState({});
-
-	const [arrSearch, setArrSearch] = useState([])
-
-	const {getTopHeadlines, clearError, process, setProcess} = NewsService();
+	const {articlesMainPage, articlesSearchResult} = useSelector(state => state);
 
 	useEffect(() => {
-        // updateArticle();
-        // eslint-disable-next-line
-		// setArrSearch(props.searchValue)
-		setArticle(props.searchValue[articleId])
+		console.log(articlesMainPage)
+		console.log(articlesSearchResult)
+		setArticlesArr([...articlesMainPage, ...articlesSearchResult])
+		console.log(articlesArr)
+		let obj = articlesArr.find(item => item.id == articleId);
+		console.log(obj)
+		setArticle(obj);
+		console.log(article)
     }, [
-		// articleId
+		articleId
 	]);
-
-    const updateArticle = () => {
-        clearError();
-        getTopHeadlines()
-            .then(onArticleLoaded)
-            .then(() => setProcess('confirmed'))
-    }
-
-    const onArticleLoaded = (item) => {
-        setArticle(item[articleId]);
-		console.log(item[articleId])
-    }
 
 	return (
 		<div className="singlePage">

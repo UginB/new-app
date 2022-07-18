@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { Provider } from 'react-redux';
 import store from '../../store/';
@@ -13,17 +13,16 @@ const MainPage = lazy(() => import('../mainPage/MainPage'));
 const SinglePage = lazy(() => import('../singlePage/SinglePage'));
 
 const App = () => {
-	const [searchValue, setSearchValue] = useState([]);
 
 	return (
 		<Provider store={store}>
 			<Router>
-				<AppHeader setSearchValue={setSearchValue}/>
+				<AppHeader/>
 				<main className="main">
 					<Suspense fallback={'Загрузка'}>
 						<Routes>
 							<Route exact path='/' element={<MainPage/>}/>
-							<Route exact path='/article/:articleId' element={<SinglePage searchValue={searchValue}/>}/>
+							<Route exact path='/article/:articleId' element={<SinglePage/>}/>
 						</Routes>
 					</Suspense>
 				</main>

@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 // import styled from 'styled-components';
 
 import noImg from '../../resources/img/no-img.jpg';
 import './HotTopic.css'
 
-const HotTopic = (props) => {
+const HotTopic = () => {
 	const [topNews, setTopNews] = useState({});
-
+	const {articlesMainPage, 
+		articlesMainPageLoadStatus
+	} = useSelector(state => state);
+	
 	useEffect(() => {
-		setTopNews(props.data[0])
+		setTopNews(articlesMainPage[0])
 	}, []);
 
 	return (
@@ -23,14 +27,12 @@ const HotTopic = (props) => {
 
 const View = ({data}) => {
 	const {
-		// author, 
-		// content, 
-		// description, 
-		// publishedAt, 
-		// source, 
+		author, 
+		description, 
+		publishedAt, 
 		title, 
-		// url, 
-		urlToImage} = data;
+		urlToImage
+	} = data;
 
 	let ImgUrl = urlToImage;
 
@@ -59,15 +61,15 @@ const View = ({data}) => {
 				</h3>
 				<div className="timeAndSource">
 					<div className="timeAndSource__time">
-						{/* {publishedAt} */}
+						{publishedAt}
 					</div>
 					<div className="timeAndSource__source">
-						{/* {author} */}
+						{author}
 					</div>
 				</div>
 			</div>
 			<div className="topicItem__text">
-				{/* {description} */}
+				{description}
 			</div>
 		</div>
 	);
