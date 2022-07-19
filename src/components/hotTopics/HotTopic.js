@@ -7,9 +7,7 @@ import './HotTopic.css'
 
 const HotTopic = () => {
 	const [topNews, setTopNews] = useState({});
-	const {articlesMainPage, 
-		articlesMainPageLoadStatus
-	} = useSelector(state => state);
+	const {articlesMainPage} = useSelector(state => state);
 	
 	useEffect(() => {
 		setTopNews(articlesMainPage[0])
@@ -33,8 +31,12 @@ const View = ({data}) => {
 		title, 
 		urlToImage
 	} = data;
-
-	let ImgUrl = urlToImage;
+	
+	const [imgUrl, setImgUrl] = useState(null)
+	
+	useEffect(() => {
+		setImgUrl(urlToImage);
+	}, []);
 
 	return(
 		<div className="topicItem">
@@ -42,11 +44,11 @@ const View = ({data}) => {
 				<img
 					className="topicItem__img"
 					onError={() => {
-						ImgUrl = noImg;
+						setImgUrl(noImg)
 					}}
 					alt={title}
 					src={
-						(ImgUrl) ? ImgUrl : noImg
+						(imgUrl) ? imgUrl : noImg
 					}
 					/>
 				<div className="topicItem__img" 

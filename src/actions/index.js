@@ -35,10 +35,3 @@ export const searchArticlesFetchingError = () => {
         type: 'SEARCH_ARTICLES_FETCHING_ERROR'
     }
 }
-
-export const setSinglePage = (article) => {
-    return {
-        type: 'SET_SINGLE_PAGE',
-        payload: article
-    }
-}

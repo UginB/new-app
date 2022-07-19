@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchArticlesFetching, searchArticlesFetched, searchArticlesFetchingError} from '../../actions'
 
 import useNewsService from '../../services/NewsService';
 
@@ -7,36 +9,37 @@ import './AppHeader.css';
 
 import union from '../../resources/img/union.svg'
 
-const AppHeader = (props) => {
+const AppHeader = () => {
 	const [showInput, setShowInput] = useState(false);
-	const [searchArr, setSearchArr] = useState([{'title':'ass'},{'title':'ass'},{'title':'ass'}]);
+	const {articlesSearchResult, articlesSearchLoadStatus} = useSelector(state => state);
+	const [itemList, setItemList] = useState([])
 
-	const {getSearchRequest, clearError, process, setProcess} = useNewsService();
+	const {getSearchRequest} = useNewsService();
+	const dispatch = useDispatch();
 
 	let inputClasses = `header__input animate__animated ${(showInput) ? 'show animate__fadeIn' : 'animate__fadeOut hide'}`
 
 	const searchRequest = (value) => {
 		if (value) {
+			console.log('rrrrr')
+			dispatch(searchArticlesFetching());
 			getSearchRequest(value)
-			.then((val) => {
-				setSearchArr(val);
-				props.setSearchValue(val)
-			} )
-			.then(() => renderSearchList(searchArr));
+			.then((data) => dispatch(searchArticlesFetched(data)))
+			.catch(searchArticlesFetchingError());
 		} else {
-			setSearchArr([]);
-			renderSearchList(searchArr)
+			console.log('ggg')
+			renderList = renderSearchList([])
 		}
 	}
 	
 	const renderSearchList = (arr) => {
-		const listClasses = (searchArr.length) ? "show" : "hide";
+		const listClasses = (articlesSearchResult.length) ? "show" : "hide";
 
 		const items = arr.map((item, i)=> {
 			return (
 				<li 
-					key={i}>
-					<Link to={`/article/${i}`}>
+					key={item.id}>
+					<Link to={`/article/${item.id}`}>
 						{item.title}
 					</Link>
 				</li>
@@ -44,29 +47,28 @@ const AppHeader = (props) => {
 		})
 
 		return (
-			<ul 
-			className=
-			// 'show'
-			{listClasses}
-			>
+			<ul className={listClasses}>
 				{items}
 			</ul>
 		)
 	}
 
+	let renderList = renderSearchList(articlesSearchResult)
+
 	return (
 		<>
 			<header className="header">
-				<div className="header__logo">
+				<Link to={`/`} className="header__logo">
 					<div className="header__logo__scqr">
 						News
 					</div> 
 					Portal
-				</div>
+				</Link>
 				<div className="header__rightSide">
-					<div className="header__search">
+					<label className="header__search" for="headerInput">
 						<input 
 							className={inputClasses} 
+							id="headerInput"
 							placeholder={'введите поисковый запрос'} 
 							name='search' 
 							onChange={(e) => searchRequest(e.target.value)}/>
@@ -75,7 +77,7 @@ const AppHeader = (props) => {
 								(showInput) ? () => setShowInput(false) : () => setShowInput(true)
 							}
 							className="header__search__img" src={union} alt="search"/>
-					</div>
+					</label>
 					<div className="header__burger">
 						<div></div>
 						<div></div>
@@ -83,7 +85,7 @@ const AppHeader = (props) => {
 					</div>
 				</div>
 			</header>
-			{renderSearchList(searchArr)}
+			{renderList}
 		</>
 	)
 }

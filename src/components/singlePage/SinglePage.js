@@ -7,38 +7,39 @@ import './SinglePage.css';
 
 const SinglePage = () => {
 	const {articleId} = useParams();
-	const [articlesArr, setArticlesArr] = useState([]);
 	const [article, setArticle] = useState({});
+	const [imgUrl, setImgUrl] = useState(null)
 	const {articlesMainPage, articlesSearchResult} = useSelector(state => state);
 
 	useEffect(() => {
-		console.log(articlesMainPage)
-		console.log(articlesSearchResult)
-		setArticlesArr([...articlesMainPage, ...articlesSearchResult])
-		console.log(articlesArr)
-		let obj = articlesArr.find(item => item.id == articleId);
-		console.log(obj)
-		setArticle(obj);
-		console.log(article)
-    }, [
-		articleId
-	]);
+		let art = [...articlesMainPage, ...articlesSearchResult].find(item => item.id == articleId);
+		setArticle(art);
+		setImgUrl(article.urlToImage);
+    }, [articleId]);
+
+	const {description, content, title} = article;
+
 
 	return (
 		<div className="singlePage">
-			<img src={
-					(!article.urlToImage) ? noImg : article.urlToImage
+			<img 
+				className="singlePage__img"
+				onError={() => {
+					setImgUrl(noImg)
+				}}
+				alt={title}
+				src={
+					(!imgUrl) ? noImg : imgUrl
 				} 
-				alt={article.title}
-				className="singlePage__img"/>
-					<h3 className="singlePage__title">
-						{article.title}
-					</h3>
-					<p className='singlePage__content'>
-						{ 
-						(!article.content) ? article.description : article.content
-						}
-					</p>
+				/>
+			<h3 className="singlePage__title">
+				{title}
+			</h3>
+			<p className='singlePage__content'>
+				{ 
+				(!content) ? description : content
+				}
+			</p>
 		</div>
 	);
 }
