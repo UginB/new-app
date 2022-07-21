@@ -7,7 +7,7 @@ import './HotTopic.css'
 
 const HotTopic = () => {
 	const [topNews, setTopNews] = useState({});
-	const {articlesMainPage} = useSelector(state => state);
+	const {articlesMainPage, articlesMainPageLoadStatus} = useSelector(state => state);
 	
 	useEffect(() => {
 		setTopNews(articlesMainPage[0])
@@ -18,7 +18,7 @@ const HotTopic = () => {
 			<h1 className="hotTopics__title">
 				Hot Topics
 			</h1>
-			<View data={topNews}/>
+			{(articlesMainPageLoadStatus === 'error') ? 'Извините, произошла ошибка' : <View data={topNews}/>}
 		</section>
 	)
 }

@@ -7,7 +7,7 @@ import './LastestNews.css';
 
 const LastestNews = () => {
 	const [newsList, setNewsList] = useState([]);
-	const {articlesMainPage} = useSelector(state => state);
+	const {articlesMainPage, articlesMainPageLoadStatus} = useSelector(state => state);
 
 	useEffect(() => {
 		setNewsList(articlesMainPage);
@@ -48,7 +48,7 @@ const LastestNews = () => {
 
         return (
             <ul className="latestNews__content">
-                {items}
+                {(articlesMainPageLoadStatus === 'error') ? 'Извините, произошла ошибка' : items}
             </ul>
         )
 	}

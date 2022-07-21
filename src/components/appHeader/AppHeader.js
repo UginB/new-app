@@ -11,8 +11,9 @@ import union from '../../resources/img/union.svg'
 
 const AppHeader = () => {
 	const [showInput, setShowInput] = useState(false);
+	const [showList, setShowList] = useState(false);
+	const [searchValue, setSearchValue] = useState('');
 	const {articlesSearchResult, articlesSearchLoadStatus} = useSelector(state => state);
-	const [itemList, setItemList] = useState([])
 
 	const {getSearchRequest} = useNewsService();
 	const dispatch = useDispatch();
@@ -20,20 +21,20 @@ const AppHeader = () => {
 	let inputClasses = `header__input animate__animated ${(showInput) ? 'show animate__fadeIn' : 'animate__fadeOut hide'}`
 
 	const searchRequest = (value) => {
+		setSearchValue(value);
 		if (value) {
-			console.log('rrrrr')
 			dispatch(searchArticlesFetching());
 			getSearchRequest(value)
 			.then((data) => dispatch(searchArticlesFetched(data)))
-			.catch(searchArticlesFetchingError());
+			.catch(searchArticlesFetchingError()); 
+			setShowList(true);
 		} else {
-			console.log('ggg')
-			renderList = renderSearchList([])
+			setShowList(false);
 		}
 	}
 	
 	const renderSearchList = (arr) => {
-		const listClasses = (articlesSearchResult.length) ? "show" : "hide";
+		const listClasses = (showList) ? "show" : "hide";
 
 		const items = arr.map((item, i)=> {
 			return (
@@ -48,12 +49,12 @@ const AppHeader = () => {
 
 		return (
 			<ul className={listClasses}>
-				{items}
+				{(searchValue) ? items : 'По вашему запросу ничего не нашлось'}
 			</ul>
 		)
 	}
 
-	let renderList = renderSearchList(articlesSearchResult)
+	let renderList = (articlesSearchLoadStatus === 'error') ? 'Извините произошла ошибка' : renderSearchList(articlesSearchResult);
 
 	return (
 		<>
@@ -65,12 +66,13 @@ const AppHeader = () => {
 					Portal
 				</Link>
 				<div className="header__rightSide">
-					<label className="header__search" for="headerInput">
+					<label className="header__search" htmlFor="headerInput">
 						<input 
 							className={inputClasses} 
 							id="headerInput"
 							placeholder={'введите поисковый запрос'} 
-							name='search' 
+							name='search'
+							value={searchValue}
 							onChange={(e) => searchRequest(e.target.value)}/>
 						<img 
 							onClick={

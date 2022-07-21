@@ -45,7 +45,8 @@
 }
 
 .header__input {
-	/* display: none; */
+	width: 100vh;
+	text-align: center;
 	margin-right: 10px;
 	border-radius: 8px;
 	padding: 0 8px 0 8px;
