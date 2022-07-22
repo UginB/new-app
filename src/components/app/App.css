@@ -8,3 +8,7 @@ body {
 	margin: 56px auto 0 auto;
 	max-width: 1170px;
 }
+
+a {
+	text-decoration: none;
+}

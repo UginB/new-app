@@ -14,11 +14,10 @@ const SinglePage = () => {
 	useEffect(() => {
 		let art = [...articlesMainPage, ...articlesSearchResult].find(item => item.id == articleId);
 		setArticle(art);
-		setImgUrl(article.urlToImage);
+		(article.urlToImage) ? setImgUrl(article.urlToImage) : setImgUrl(noImg);
     }, [articleId]);
 
 	const {description, content, title} = article;
-
 
 	return (
 		<div className="singlePage">
@@ -29,7 +28,7 @@ const SinglePage = () => {
 				}}
 				alt={title}
 				src={
-					(!imgUrl) ? noImg : imgUrl
+					imgUrl  
 				} 
 				/>
 			<h3 className="singlePage__title">

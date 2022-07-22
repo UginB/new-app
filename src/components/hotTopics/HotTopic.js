@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 // import styled from 'styled-components';
 
 import noImg from '../../resources/img/no-img.jpg';
@@ -29,7 +30,8 @@ const View = ({data}) => {
 		description, 
 		publishedAt, 
 		title, 
-		urlToImage
+		urlToImage,
+		id
 	} = data;
 	
 	const [imgUrl, setImgUrl] = useState(null)
@@ -39,41 +41,45 @@ const View = ({data}) => {
 	}, []);
 
 	return(
-		<div className="topicItem">
-			<div className="topicItem__left">
-				<img
-					className="topicItem__img"
-					onError={() => {
-						setImgUrl(noImg)
-					}}
+		<Link to={`/article/${id}`}>
+			<div className="topicItem">
+				<div className="topicItem__left">
+					<img
+						className="topicItem__img"
+						onError={() => {
+							setImgUrl(noImg)
+						}}
+						alt={title}
+						src={
+							// (imgUrl) ? 
+							imgUrl 
+							// : noImg
+						}
+						/>
+					<div className="topicItem__img" 
 					alt={title}
-					src={
-						(imgUrl) ? imgUrl : noImg
-					}
-					/>
-				<div className="topicItem__img" 
-				alt={title}
-				style={{
-					backgroundImage: `url(${urlToImage})`,
-					backgroundSize: 'cover',
-					backgroundRepeat: 'no-repeat'
-				}}/>
-				<h3 className="topicItem__title">
-					{title}
-				</h3>
-				<div className="timeAndSource">
-					<div className="timeAndSource__time">
-						{publishedAt}
-					</div>
-					<div className="timeAndSource__source">
-						{author}
+					style={{
+						backgroundImage: `url(${urlToImage})`,
+						backgroundSize: 'cover',
+						backgroundRepeat: 'no-repeat'
+					}}/>
+					<h3 className="topicItem__title">
+						{title}
+					</h3>
+					<div className="timeAndSource">
+						<div className="timeAndSource__time">
+							{publishedAt}
+						</div>
+						<div className="timeAndSource__source">
+							{author}
+						</div>
 					</div>
 				</div>
+				<div className="topicItem__text">
+					{description}
+				</div>
 			</div>
-			<div className="topicItem__text">
-				{description}
-			</div>
-		</div>
+		</Link>
 	);
 }
 
