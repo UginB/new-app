@@ -1,6 +1,8 @@
 import {useHttp} from '../hooks/http.hook';
 import nextId from 'react-id-generator/';
 
+import noImg from '../resources/img/no-img.jpg';
+
 const useNewsService = () => {
 	const {request} = useHttp();
 
@@ -21,7 +23,11 @@ const useNewsService = () => {
 
 	const _transformData = (data) => {
 		return data.map(item => {
-			return {...item, id : nextId()}
+			return {
+				...item, 
+				urlToImage: (item.urlToImage) ? item.urlToImage : noImg,
+				id : nextId()
+			}
 		})
 	}
 

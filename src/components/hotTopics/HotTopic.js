@@ -47,14 +47,10 @@ const View = ({data}) => {
 					<img
 						className="topicItem__img"
 						onError={() => {
-							setImgUrl(noImg)
+							// setImgUrl(noImg)
 						}}
 						alt={title}
-						src={
-							// (imgUrl) ? 
-							imgUrl 
-							// : noImg
-						}
+						src={imgUrl}
 						/>
 					<div className="topicItem__img" 
 					alt={title}
