@@ -9,8 +9,8 @@ const useNewsService = () => {
 	const _apiBase = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/';
 	const _apiKey = 'ca7b227040a64e36bcc5fbbe4defc5c9';
 
-	const getTopHeadlines = async (country = 'ru') => {
-        const res = await request(`${_apiBase}top-headlines?country=${country}&apiKey=${_apiKey}`);
+	const getTopHeadlines = async (country = 'ru', category = 'general') => {
+        const res = await request(`${_apiBase}top-headlines?country=${country}&category=${category}&apiKey=${_apiKey}`);
 		console.log(_transformData(res.articles))
         return _transformData(res.articles);
     }

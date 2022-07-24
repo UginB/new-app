@@ -14,8 +14,7 @@ const NewsItem = ({data}) => {
 
 	return(
 		<li 
-			className="newsItem"
-			key={id}>
+			className="newsItem">
 			<Link to={`/article/${id}`}>
 				<img 
 					onError={() => setImgUrl(noImg)}
@@ -30,7 +29,7 @@ const NewsItem = ({data}) => {
 					<div className="timeAndSource__source">{author}</div>
 				</div>
 			</Link>
-	</li>
+		</li>
 	)
 }
 

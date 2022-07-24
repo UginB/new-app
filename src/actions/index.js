@@ -35,3 +35,11 @@ export const searchArticlesFetchingError = () => {
         type: 'SEARCH_ARTICLES_FETCHING_ERROR'
     }
 }
+
+
+export const setCategory = (category) => {
+    return {
+        type: 'SET_CATEGORY',
+		payload: category
+    }
+}

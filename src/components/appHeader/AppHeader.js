@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchArticlesFetching, searchArticlesFetched, searchArticlesFetchingError} from '../../actions'
+import { searchArticlesFetching, searchArticlesFetched, searchArticlesFetchingError, setCategory} from '../../actions'
 
 import useNewsService from '../../services/NewsService';
 
@@ -13,7 +13,7 @@ const AppHeader = () => {
 	const [showInput, setShowInput] = useState(false);
 	const [showList, setShowList] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
-	const {articlesSearchResult, articlesSearchLoadStatus} = useSelector(state => state);
+	const {articlesSearchResult, articlesSearchLoadStatus, categories} = useSelector(state => state);
 
 	const {getSearchRequest} = useNewsService();
 	const dispatch = useDispatch();
@@ -54,7 +54,27 @@ const AppHeader = () => {
 		)
 	}
 
+	const renderCategoriesList = (arr) => {
+		const items = arr.map((item, i)=> {
+			return (
+				<li 
+					key={i}
+					onClick={() => dispatch(setCategory(item))}
+					>
+					{item}
+				</li>
+			)
+		})
+
+		return (
+			<ul>
+				{items}
+			</ul>
+		)
+	}
+
 	let renderList = (articlesSearchLoadStatus === 'error') ? 'Извините произошла ошибка' : renderSearchList(articlesSearchResult);
+	let renderCategories = renderCategoriesList(categories);
 
 	return (
 		<>
@@ -88,14 +108,7 @@ const AppHeader = () => {
 				</div>
 			</header>
 			{renderList}
-			<ul>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
+			{renderCategories}
 		</>
 	)
 }

@@ -18,7 +18,7 @@ const LastestNews = () => {
 		const items =  arr.map((item, i) => {
             if (i !== 0) {
 				return (
-					<NewsItem data={item}/>
+					<NewsItem key={item.id} data={item}/>
 				)
 			}
         });
