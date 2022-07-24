@@ -1,10 +1,14 @@
 const initialState = {
     articlesMainPage: [],
 	articlesSearchResult: [],
+	categories: ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'],
+	counties: ['ae','ar','at','au','be','bg','br','ca','ch','cn','co','cu','cz','de','eg','fr','gb','gr','hk','hu','id','ie','il','in','it','jp','kr','lt','lv','ma','mx','my','ng','nl','no','nz','ph','pl','pt','ro','rs','ru','sa','se','sg','si','sk','th','tr','tw','ua','us','ve','za'],
     articlesMainPageLoadStatus: 'idle',
 	articlesSearchLoadStatus: 'idle',
 	articleLoadStatus: 'idle',
-    currentFilter: 'all'
+    currentCategory: 'business,entertainment,general,health,science,sports,technology',
+	currentCountry: 'ae,ar,at,au,be,bg,br,ca,ch,cn,co,cu,cz,de,eg,fr,gb,gr,hk,hu,id,ie,il,in,it,jp,kr,lt,lv,ma,mx,my,ng,nl,no,nz,ph,pl,pt,ro,rs,ru,sa,se,sg,si,sk,th,tr,tw,ua,us,ve,za',
+	pageSize: 20,
 }
 
 const reducer = (state = initialState, action) => {
