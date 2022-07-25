@@ -36,10 +36,16 @@ export const searchArticlesFetchingError = () => {
     }
 }
 
-
 export const setCategory = (category) => {
     return {
         type: 'SET_CATEGORY',
 		payload: category
+    }
+}
+
+export const sideMenuShow = (boolean) => {
+    return {
+        type: 'SIDE_MENU_SHOW',
+		payload: boolean
     }
 }

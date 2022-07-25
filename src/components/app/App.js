@@ -5,6 +5,7 @@ import store from '../../store/';
 
 import AppHeader from '../appHeader/AppHeader';
 import AppFooter from '../appFooter/AppFooter';
+import SideMenu from '../sideMenu/SideMenu';
 
 import './App.css';
 import 'animate.css';
@@ -19,6 +20,7 @@ const App = () => {
 			<Router>
 				<AppHeader/>
 				<main className="main">
+					<SideMenu/>
 					<Suspense fallback={'Загрузка'}>
 						<Routes>
 							<Route exact path='/' element={<MainPage/>}/>

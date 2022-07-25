@@ -1,0 +1,30 @@
+.sideMenu {
+	z-index: 9999999;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	background-color: rgba(0, 0, 0, 0.7);
+	width: 350px;
+	height: 100vh;
+	color:#F8F8F8;
+	margin: 0;
+	padding-top: 20px;
+	line-height: 50px;
+	font-weight: 500;
+    font-size: 22px;
+}
+
+.sideMenu_hide {
+	left: -100%;
+}
+
+.sideMenu__item {
+	cursor: pointer;
+	list-style-type: disclosure-closed;
+}
+
+.sideMenu__item:hover {
+	text-decoration: underline;
+}

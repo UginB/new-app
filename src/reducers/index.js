@@ -9,6 +9,7 @@ const initialState = {
     currentCategory: 'general',
 	currentCountry: 'ru',
 	pageSize: 20,
+	sideMenu: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -50,7 +51,12 @@ const reducer = (state = initialState, action) => {
 				...state,
 				currentCategory: action.payload
 			}
-        default: return state
+		case 'SIDE_MENU_SHOW':
+			return {
+				...state,
+				sideMenu: action.payload
+			}
+		default: return state
     }
 }
 

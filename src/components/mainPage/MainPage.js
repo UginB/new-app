@@ -16,7 +16,7 @@ const MainPage = () => {
 		getTopHeadlines(currentCountry, currentCategory)
 			.then(data => dispatch(mainArticlesFetched(data)))
 			.catch(() => dispatch(mainArticlesFetchingError()));
-	}, []);
+	}, [currentCategory, currentCountry]);
 
 	return (
 		<>
