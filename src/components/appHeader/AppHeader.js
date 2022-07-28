@@ -30,6 +30,7 @@ const AppHeader = () => {
 			setShowList(true);
 		} else {
 			setShowList(false);
+			setSearchValue('')
 		}
 	}
 	
@@ -60,7 +61,12 @@ const AppHeader = () => {
 		<>
 			<header className="header">
 				<Link to={`/`} className="header__logo">
-					<div className="header__logo__scqr">
+					<div 
+						onClick={() => {
+							setShowList(false);
+							setSearchValue('');
+						}}
+						className="header__logo__scqr">
 						News
 					</div> 
 					Portal
@@ -90,7 +96,6 @@ const AppHeader = () => {
 				</div>
 			</header>
 			{renderList}
-			
 		</>
 	)
 }

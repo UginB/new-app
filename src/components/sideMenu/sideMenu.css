@@ -28,3 +28,7 @@
 .sideMenu__item:hover {
 	text-decoration: underline;
 }
+
+.sideMenu__item_current {
+	color: orange;
+}

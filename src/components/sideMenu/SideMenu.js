@@ -4,10 +4,12 @@ import { setCategory, sideMenuShow} from '../../actions';
 import './sideMenu.css';
 
 const SideMenu = () => {
-	const {categories, sideMenu} = useSelector(state => state);
+	const {categories, sideMenu, currentCategory} = useSelector(state => state);
 	const dispatch = useDispatch();
 
-	const sideMenuClasses = `sideMenu animate__animated ${(sideMenu) ? 'sideMenu_show animate__fadeInLeft' : 'animate__fadeOut sideMenu_hide'}`
+	const sideMenuClasses = `sideMenu animate__animated ${(sideMenu) ? 'sideMenu_show animate__fadeInLeft' : 'animate__fadeOut sideMenu_hide'}`;
+
+	const categoryItemClasses = (category) => (currentCategory === category) ? 'sideMenu__item_current' : 'sideMenu__item';
 
 	const renderCategoriesList = (arr) => {
 		const items = arr.map((item, i)=> {
@@ -18,8 +20,7 @@ const SideMenu = () => {
 						dispatch(setCategory(item));
 						dispatch(sideMenuShow(false));
 					}}
-					className='sideMenu__item'
-					>
+					className={categoryItemClasses(item)}>
 					{item}
 				</li>
 			)
@@ -34,6 +35,7 @@ const SideMenu = () => {
 			</ul>
 		)
 	}
+	
 	let renderCategories = renderCategoriesList(categories);
 
 	return (

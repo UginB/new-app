@@ -1,0 +1,33 @@
+.newsItem {
+	position: relative;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	width: 270px;
+	height: 294px;
+	border-radius: 8px;
+}
+
+.newsItem:hover {
+	background-color: rgb(238, 243, 255);
+}
+
+.newsItem__title {
+	margin: 192px 0 24px 0;
+	font-family: 'Playfair Display';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 30px;
+	color: #121221;
+}
+
+.newsItem__img {
+	position: absolute;
+	width: 270px;
+	height: 176px;
+	border-radius: 8px;
+	/* object-fit: cover; */
+	object-fit: contain;
+	background-color: black;
+}

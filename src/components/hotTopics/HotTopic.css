@@ -39,7 +39,7 @@
 	height: 100%;
 	border-radius: 8px;
 	z-index: -999;
-	filter: brightness(60%)
+	filter: brightness(30%)
 }
 
 .timeAndSource {

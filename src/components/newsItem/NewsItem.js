@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import noImg from '../../resources/img/no-img.jpg';
 
+import './NewsItem.css';
+
 const NewsItem = ({data}) => {
 	const [imgUrl, setImgUrl] = useState(null);
 
@@ -22,7 +24,7 @@ const NewsItem = ({data}) => {
 					alt={title}
 					className="newsItem__img"/>
 				<h3 className="newsItem__title">
-					{(title.length > 40) ? `${title.substr(0, 35)}...` : title}
+					{(title.length > 35) ? `${title.substr(0, 35)}...` : title}
 				</h3>
 				<div className="timeAndSource timeAndSource_grey">
 					<div className="timeAndSource__time">{publishedAt}</div>
