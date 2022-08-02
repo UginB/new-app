@@ -6,8 +6,8 @@ import noImg from '../resources/img/no-img.jpg';
 const useNewsService = () => {
 	const {request} = useHttp();
 
-	// const _apiBase = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/';
-	const _apiBase = 'https://newsapi.org/v2/';
+	const _apiBase = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/';
+	// const _apiBase = 'https://newsapi.org/v2/';
 	const _apiKey = 'ca7b227040a64e36bcc5fbbe4defc5c9';
 
 	const getTopHeadlines = async (country = 'ru', category = 'general') => {
