@@ -7,31 +7,37 @@ import './NewsItem.css';
 
 const NewsItem = ({data}) => {
 	const [imgUrl, setImgUrl] = useState(null);
-
-	const {id, title, publishedAt, author, urlToImage} = data;
+	const {id, 
+		title, 
+		published_date, 
+		byline, 
+		// media
+		multimedia
+	} = data;
 
 	useEffect(() => {
-		setImgUrl(urlToImage);
-	}, []);
+		// (media && media.length !== 0) ? setImgUrl(media[0]['media-metadata'][2].url) : setImgUrl(noImg)  
+		(multimedia && multimedia.length !== 0) ? setImgUrl(multimedia[2].url) : setImgUrl(noImg);
+	}, [multimedia]);
 
 	return(
-		<li 
-			className="newsItem">
-			<Link to={`/article/${id}`}>
+		<Link to={`/article/${id}`}>
+			<li 
+				className="newsItem">
 				<img 
 					onError={() => setImgUrl(noImg)}
 					src={imgUrl} 
 					alt={title}
 					className="newsItem__img"/>
 				<h3 className="newsItem__title">
-					{(title.length > 35) ? `${title.substr(0, 35)}...` : title}
+					{(title.length > 50) ? `${title.substr(0, 50)}...` : title}
 				</h3>
 				<div className="timeAndSource timeAndSource_grey">
-					<div className="timeAndSource__time">{publishedAt}</div>
-					<div className="timeAndSource__source">{author}</div>
+					<div className="timeAndSource__time">{published_date}</div>
+					<div className="timeAndSource__source">{byline}</div>
 				</div>
-			</Link>
-		</li>
+			</li>
+		</Link>
 	)
 }
 

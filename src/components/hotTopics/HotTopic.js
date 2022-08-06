@@ -11,8 +11,8 @@ const HotTopic = () => {
 	const {articlesMainPage, articlesMainPageLoadStatus} = useSelector(state => state);
 	
 	useEffect(() => {
-		setTopNews(articlesMainPage[0])
-	}, []);
+		setTopNews(articlesMainPage[1]);
+	}, [articlesMainPage]);
 
 	return (
 		<section className="hotTopics">
@@ -26,53 +26,48 @@ const HotTopic = () => {
 
 const View = ({data}) => {
 	const {
-		author, 
-		description, 
-		publishedAt, 
+		byline, 
+		abstract, 
+		published_date, 
 		title, 
-		urlToImage,
+		// media,
+		multimedia,
 		id
 	} = data;
 	
 	const [imgUrl, setImgUrl] = useState(null)
 	
 	useEffect(() => {
-		setImgUrl(urlToImage);
-	}, []);
+		// (media && media.length !== 0) ? setImgUrl(media[0]['media-metadata'][2].url) : setImgUrl(noImg);
+		(multimedia && multimedia.length !== 0) ? setImgUrl(multimedia[2].url) : setImgUrl(noImg);
+	}, [multimedia]);
 
 	return(
 		<Link to={`/article/${id}`}>
 			<div className="topicItem">
 				<div className="topicItem__left">
 					<img
-						className="topicItem__img"
 						onError={() => {
 							setImgUrl(noImg)
 						}}
-						alt={title}
 						src={imgUrl}
+						alt={title}
+						className="topicItem__img"
 						/>
-					<div className="topicItem__img" 
-					alt={title}
-					style={{
-						backgroundImage: `url(${urlToImage})`,
-						backgroundSize: 'cover',
-						backgroundRepeat: 'no-repeat'
-					}}/>
 					<h3 className="topicItem__title">
 						{title}
 					</h3>
 					<div className="timeAndSource">
 						<div className="timeAndSource__time">
-							{publishedAt}
+							{published_date}
 						</div>
 						<div className="timeAndSource__source">
-							{author}
+							{byline}
 						</div>
 					</div>
 				</div>
 				<div className="topicItem__text">
-					{description}
+					{abstract}
 				</div>
 			</div>
 		</Link>

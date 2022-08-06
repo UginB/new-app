@@ -6,27 +6,31 @@ import noImg from '../resources/img/no-img.jpg';
 const useNewsService = () => {
 	const {request} = useHttp();
 
-	const _apiBase = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/';
-	// const _apiBase = 'https://newsapi.org/v2/';
-	const _apiKey = 'ca7b227040a64e36bcc5fbbe4defc5c9';
+	const _apiBase = 'https://api.nytimes.com/svc/';
+	const _apiKey = 'v4kDqrpaGUclSouAkG457SGtvpsry2Ri';
 
-	const getTopHeadlines = async (country = 'ru', category = 'general') => {
-        const res = await request(`${_apiBase}top-headlines?country=${country}&category=${category}&apiKey=${_apiKey}`);
-		console.log(_transformData(res.articles))
-        return _transformData(res.articles);
+	// const getTopHeadlines = async (country = 'ru', category = 'general') => {
+    //     const res = await request(`${_apiBase}top-headlines?country=${country}&category=${category}&apiKey=${_apiKey}`);
+	// 	console.log(_transformData(res.articles))
+    //     return _transformData(res.articles);
+    // }
+
+	const getTopHeadlines = async (category = 'world') => {
+        const res = await request(`${_apiBase}topstories/v2/${category}.json?api-key=${_apiKey}`);
+		console.log(res.results)
+        return _transformData(res.results);
     }
 
 	const getSearchRequest = async (value) => {
-        const res = await request(`${_apiBase}everything?q=${value}&sortBy=popularity&pageSize=10&apiKey=${_apiKey}`);
-		console.log(_transformData(res.articles))
-        return _transformData(res.articles);
+        const res = await request(`${_apiBase}search/v2/articlesearch.json?fq=romney&facet_field=day_of_week&facet=true&begin_date=20120101&end_date=20120101&api-key=${_apiKey}`);
+		console.log(res.response.docs)
+        return _transformData(res.response.docs);
 	}
 
 	const _transformData = (data) => {
 		return data.map(item => {
 			return {
-				...item, 
-				urlToImage: (item.urlToImage) ? item.urlToImage : noImg,
+				...item,
 				id : nextId()
 			}
 		})

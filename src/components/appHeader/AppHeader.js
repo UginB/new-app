@@ -25,7 +25,10 @@ const AppHeader = () => {
 		if (value) {
 			dispatch(searchArticlesFetching());
 			getSearchRequest(value)
-			.then((data) => dispatch(searchArticlesFetched(data)))
+			.then((data) => {
+				dispatch(searchArticlesFetched(data));
+				console.log(data)
+			})
 			.catch(searchArticlesFetchingError()); 
 			setShowList(true);
 		} else {
@@ -36,15 +39,15 @@ const AppHeader = () => {
 	
 	const renderSearchList = (arr) => {
 		const listClasses = (showList) ? "show" : "hide";
-
+		console.log(arr)
 		const items = arr.map((item, i)=> {
 			return (
-				<li 
-					key={item.id}>
-					<Link to={`/article/${item.id}`}>
-						{item.title}
-					</Link>
-				</li>
+				<Link to={`/article/${item.id}`}>
+					<li 
+						key={item.id}>
+							{item.snippet}
+					</li>
+				</Link>
 			)
 		})
 

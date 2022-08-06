@@ -12,11 +12,11 @@ const LastestNews = () => {
 
 	useEffect(() => {
 		setNewsList(articlesMainPage);
-	}, []);
+	}, [articlesMainPage]);
 
 	const renderNewsList = (arr) => {
 		const items =  arr.map((item, i) => {
-            if (i !== 0) {
+            if (i !== 0 || i !== 1) {
 				return (
 					<NewsItem key={item.id} data={item}/>
 				)

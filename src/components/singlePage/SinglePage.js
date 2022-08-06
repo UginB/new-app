@@ -13,12 +13,14 @@ const SinglePage = () => {
 	const {articlesMainPage, articlesSearchResult} = useSelector(state => state);
 
 	useEffect(() => {
-		let art = [...articlesMainPage, ...articlesSearchResult].find(item => item.id === articleId);
+		let art = [...articlesMainPage, ...articlesSearchResult].find(item => +item.id === +articleId);
+		console.log(art)
 		setArticle(art);
-		setImgUrl(art.urlToImage)
-    }, [articleId]);
+		// (art.media && art.media.length !== 0) ? setImgUrl(art.media[0]['media-metadata'][2].url) : setImgUrl(noImg);
+		(art.multimedia && art.multimedia.length !== 0) ? setImgUrl(art.multimedia[2].url) : setImgUrl(noImg);
+	}, [articleId]);
 
-	const {description, content, title} = article;
+	const {abstract, title, url} = article;
 
 	return (
 		<div className="singlePage">
@@ -32,9 +34,8 @@ const SinglePage = () => {
 				{title}
 			</h3>
 			<p className='singlePage__content'>
-				{ 
-				(!content) ? description : content
-				}
+				{abstract} <br/>
+				<a href={url}>{url}</a>
 			</p>
 		</div>
 	);

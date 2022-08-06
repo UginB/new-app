@@ -9,14 +9,14 @@ const MainPage = () => {
     const dispatch = useDispatch();
 	const {getTopHeadlines} = useNewsService();
 
-	const {articlesMainPageLoadStatus, currentCountry, currentCategory} = useSelector(state => state);
+	const {articlesMainPageLoadStatus, currentCategory} = useSelector(state => state);
 
 	useEffect(() => {
 		dispatch(mainArticlesFetching());
-		getTopHeadlines(currentCountry, currentCategory)
+		getTopHeadlines(currentCategory)
 			.then(data => dispatch(mainArticlesFetched(data)))
 			.catch(() => dispatch(mainArticlesFetchingError()));
-	}, [currentCategory, currentCountry]);
+	}, [currentCategory]);
 
 	return (
 		<>
