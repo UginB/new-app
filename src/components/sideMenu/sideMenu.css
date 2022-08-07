@@ -1,6 +1,6 @@
 .sideMenu {
 	z-index: 9999999;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	display: flex;
@@ -11,7 +11,7 @@
 	color:#F8F8F8;
 	margin: 0;
 	padding-top: 20px;
-	line-height: 50px;
+	line-height: 30px;
 	font-weight: 500;
     font-size: 22px;
 }

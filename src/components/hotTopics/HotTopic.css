@@ -39,7 +39,9 @@
 	height: 100%;
 	border-radius: 8px;
 	z-index: -999;
-	filter: brightness(30%)
+	filter: brightness(50%);
+	object-fit: contain;
+	background-color: black;
 }
 
 .timeAndSource {

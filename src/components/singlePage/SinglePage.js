@@ -13,7 +13,7 @@ const SinglePage = () => {
 	const {articlesMainPage, articlesSearchResult} = useSelector(state => state);
 
 	useEffect(() => {
-		let art = [...articlesMainPage, ...articlesSearchResult].find(item => +item.id === +articleId);
+		let art = [...articlesMainPage, ...articlesSearchResult].find(item => item.id.replace("id", "") === articleId.replace("id", ""));
 		console.log(art)
 		setArticle(art);
 		// (art.media && art.media.length !== 0) ? setImgUrl(art.media[0]['media-metadata'][2].url) : setImgUrl(noImg);

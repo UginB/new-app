@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import styled from 'styled-components';
 
 import noImg from '../../resources/img/no-img.jpg';
 import './HotTopic.css'
@@ -11,13 +10,13 @@ const HotTopic = () => {
 	const {articlesMainPage, articlesMainPageLoadStatus} = useSelector(state => state);
 	
 	useEffect(() => {
-		setTopNews(articlesMainPage[1]);
+		setTopNews(articlesMainPage[0]);
 	}, [articlesMainPage]);
 
 	return (
 		<section className="hotTopics">
 			<h1 className="hotTopics__title">
-				Hot Topics
+				Hot Topic
 			</h1>
 			{(articlesMainPageLoadStatus === 'error') ? 'Извините, произошла ошибка' : <View data={topNews}/>}
 		</section>

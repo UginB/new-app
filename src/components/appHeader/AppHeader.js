@@ -42,12 +42,12 @@ const AppHeader = () => {
 		console.log(arr)
 		const items = arr.map((item, i)=> {
 			return (
-				<Link to={`/article/${item.id}`}>
-					<li 
-						key={item.id}>
-							{item.snippet}
-					</li>
-				</Link>
+				<li 
+					key={item.id}>
+					<Link to={`/article/${item.id}`}>
+						{item.snippet}
+					</Link>
+				</li>
 			)
 		})
 
