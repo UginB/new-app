@@ -47,7 +47,7 @@
 .header__input {
 	text-align: center;
 	margin-right: 10px;
-	border-radius: 8px;
+	border-radius: 4px;
 	padding: 0 8px 0 8px;
 	height: 25px;
 }
@@ -74,4 +74,15 @@
 	height: 2px;
 	width: 22.97px;
 	background: #000000;
+}
+
+.header button {
+	cursor: pointer;
+	margin: 0 4px 0 0;
+	align-items: center;
+	width: 56px;
+	height: 29px;
+	background: #121221;
+	border-radius: 4px;
+	color: #F8F8F8;
 }

@@ -30,7 +30,7 @@ const NewsItem = ({data}) => {
 					alt={title}
 					className="newsItem__img"/>
 				<h3 className="newsItem__title">
-					{(title.length > 50) ? `${title.substr(0, 50)}...` : title}
+					{(title.length > 45) ? `${title.substr(0, 45)}...` : title}
 				</h3>
 				<div className="timeAndSource timeAndSource_grey">
 					<div className="timeAndSource__time">{published_date}</div>

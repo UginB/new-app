@@ -27,7 +27,15 @@
 	width: 270px;
 	height: 176px;
 	border-radius: 8px;
-	/* object-fit: cover; */
 	object-fit: contain;
 	background-color: black;
+}
+
+.timeAndSource {
+	position: absolute;
+	bottom: 0;
+}
+
+.timeAndSource__time {
+	width: 60px;
 }

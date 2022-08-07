@@ -19,9 +19,9 @@ const AppHeader = () => {
 	const dispatch = useDispatch();
 
 	let inputClasses = `header__input animate__animated ${(showInput) ? 'show animate__fadeIn' : 'animate__fadeOut hide'}`
+	let btnClasses = `animate__animated ${(showInput) ? 'show animate__fadeIn' : 'animate__fadeOut hide'}`
 
 	const searchRequest = (value) => {
-		setSearchValue(value);
 		if (value) {
 			dispatch(searchArticlesFetching());
 			getSearchRequest(value)
@@ -39,21 +39,24 @@ const AppHeader = () => {
 	
 	const renderSearchList = (arr) => {
 		const listClasses = (showList) ? "show" : "hide";
-		console.log(arr)
-		const items = arr.map((item, i)=> {
+		const items = (arr.length) ? 
+		arr.map((item, i)=> {
 			return (
 				<li 
 					key={item.id}>
-					<Link to={`/article/${item.id}`}>
+					<a href={item.web_url}>
 						{item.snippet}
-					</Link>
+					</a>
 				</li>
 			)
-		})
+		}) :
+		'По вашему запросу ничего не нашлось'
 
 		return (
 			<ul className={listClasses}>
-				{(searchValue) ? items : 'По вашему запросу ничего не нашлось'}
+				{
+					(searchValue) ? items : null
+				}
 			</ul>
 		)
 	}
@@ -76,13 +79,29 @@ const AppHeader = () => {
 				</Link>
 				<div className="header__rightSide">
 					<label className="header__search" htmlFor="headerInput">
+						<button 
+							className={btnClasses}
+							onClick={() => {
+							setSearchValue('');
+							setShowList(false);
+						}}>reset</button>
+						<button 
+							className={btnClasses}
+							onClick={() => {
+							searchRequest(searchValue);
+							setShowList(true);
+						}}>search</button>
 						<input 
 							className={inputClasses} 
 							id="headerInput"
 							placeholder={'введите поисковый запрос'} 
 							name='search'
 							value={searchValue}
-							onChange={(e) => searchRequest(e.target.value)}/>
+							onChange={(e) => {
+								setSearchValue(e.target.value);
+								setShowList(false);
+							}}
+							/>
 						<img 
 							onClick={
 								(showInput) ? () => setShowInput(false) : () => setShowInput(true)

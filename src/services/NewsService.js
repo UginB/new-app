@@ -7,12 +7,6 @@ const useNewsService = () => {
 	const _apiBase = 'https://api.nytimes.com/svc/';
 	const _apiKey = 'v4kDqrpaGUclSouAkG457SGtvpsry2Ri';
 
-	// const getTopHeadlines = async (country = 'ru', category = 'general') => {
-    //     const res = await request(`${_apiBase}top-headlines?country=${country}&category=${category}&apiKey=${_apiKey}`);
-	// 	console.log(_transformData(res.articles))
-    //     return _transformData(res.articles);
-    // }
-
 	const getTopHeadlines = async (category = 'world') => {
         const res = await request(`${_apiBase}topstories/v2/${category}.json?api-key=${_apiKey}`);
 		console.log(res.results)
@@ -20,18 +14,20 @@ const useNewsService = () => {
     }
 
 	const getSearchRequest = async (value) => {
-        const res = await request(`${_apiBase}search/v2/articlesearch.json?fq=romney&facet_field=day_of_week&facet=true&begin_date=20120101&end_date=20120101&api-key=${_apiKey}`);
+        const res = await request(`${_apiBase}search/v2/articlesearch.json?q=${value}&api-key=${_apiKey}`);
 		console.log(res.response.docs)
         return _transformData(res.response.docs);
 	}
 
 	const _transformData = (data) => {
-		// const arr = data.filter(item => item.item_type === 'Article');
+		const arr = data.filter(item => item.item_type === 'Article');
 		
-		return data.map(item => {
+		return arr.map(item => {
 			return {
 				...item,
-				id : nextId()
+				id : nextId(),
+				published_date: `${item.published_date.slice(0, 10).split('-').reverse().join('.')} ${item.published_date.slice(11, 16)}`,
+				content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem accusamus sunt earum laboriosam quia reiciendis corporis itaque beatae aut error harum possimus cum ut voluptatem, necessitatibus assumenda ea ullam obcaecati.'
 			}
 		})
 	}

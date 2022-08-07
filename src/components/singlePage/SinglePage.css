@@ -1,6 +1,7 @@
 .singlePage {
 	display: block;
 	position: relative;
+	padding: 0 0 120px 0;
 }
 
 .singlePage__img {
@@ -23,4 +24,10 @@
 
 .singlePage__content {
 	padding-top: 230px;
+}
+
+.singlePage__back {
+	font-weight: 500;
+    font-size: 22px;
+	text-decoration: underline;
 }

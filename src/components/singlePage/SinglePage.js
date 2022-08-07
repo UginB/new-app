@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -20,7 +20,7 @@ const SinglePage = () => {
 		(art.multimedia && art.multimedia.length !== 0) ? setImgUrl(art.multimedia[2].url) : setImgUrl(noImg);
 	}, [articleId]);
 
-	const {abstract, title, url} = article;
+	const {abstract, content, title, url} = article;
 
 	return (
 		<div className="singlePage">
@@ -35,8 +35,12 @@ const SinglePage = () => {
 			</h3>
 			<p className='singlePage__content'>
 				{abstract} <br/>
+				 {content} <br/>
 				<a href={url}>{url}</a>
 			</p>
+			<Link to={`/`} className='singlePage__back'>
+				&lArr; Вернуться на главную
+			</Link>
 		</div>
 	);
 }

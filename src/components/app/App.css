@@ -1,11 +1,10 @@
 body {
 	position: relative;
 	min-height: 100vh;
-	padding-bottom: 83px;
 } 
 
 .main {
-	margin: 56px auto 0 auto;
+	margin: 10px auto 10px auto;
 	max-width: 1170px;
 }
 
@@ -18,7 +17,7 @@ a {
 		max-width: 970px;
 	}
 	.main {
-		margin: 56px auto 0 auto;
+		margin: 0 auto 0 auto;
 		max-width: 970px;
 	}
 }
