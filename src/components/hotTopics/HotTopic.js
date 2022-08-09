@@ -56,7 +56,7 @@ const View = ({data}) => {
 					<h3 className="topicItem__title">
 						{title}
 					</h3>
-					<div className="timeAndSource">
+					<div className="timeAndSource timeAndSource_hot">
 						<div className="timeAndSource__time">
 							{published_date}
 						</div>

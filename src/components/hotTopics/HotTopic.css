@@ -53,6 +53,9 @@
 	color: #F8F8F8;
 }
 
+.timeAndSource_hot {
+	padding-bottom: 15px;
+}
 .timeAndSource__source {
 	padding-left: 27px;
 }

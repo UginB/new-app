@@ -5,9 +5,12 @@
 .latestNews__content {
 	padding: 24px 0 0 0;
 	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, 270px);
-	column-gap: 30px;
+	/* display: grid; */
+	/* grid-template-columns: repeat(auto-fit, 270px); */
+	/* column-gap: 30px; */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	row-gap: 64px;
 }
 
