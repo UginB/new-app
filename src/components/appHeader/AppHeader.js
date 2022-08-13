@@ -38,7 +38,7 @@ const AppHeader = () => {
 	}
 	
 	const renderSearchList = (arr) => {
-		const listClasses = (showList) ? "show" : "hide";
+		const listClasses = (showList) ? "searchList show" : "searchList hide";
 		const items = (arr.length) ? 
 		arr.map((item, i)=> {
 			return (

@@ -5,15 +5,22 @@
 	left: 0;
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
 	background-color: rgba(0, 0, 0, 0.7);
 	width: 350px;
 	height: 100vh;
 	color:#F8F8F8;
 	margin: 0;
-	padding-top: 20px;
+	padding-top: 40px;
 	line-height: 30px;
 	font-weight: 500;
     font-size: 22px;
+}
+
+.sideMenu__title {
+	position: absolute;
+	top: 9px;
+	left: 20%;
 }
 
 .sideMenu_hide {

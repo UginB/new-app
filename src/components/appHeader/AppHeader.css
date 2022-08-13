@@ -86,3 +86,8 @@
 	border-radius: 4px;
 	color: #F8F8F8;
 }
+
+.searchList a {
+	color: rgb(136, 102, 38);
+	font-size: 14px;
+}

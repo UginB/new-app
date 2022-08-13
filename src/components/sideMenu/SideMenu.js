@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategory, sideMenuShow} from '../../actions';
+import { Link } from 'react-router-dom';
 
 import './sideMenu.css';
 
@@ -30,7 +31,7 @@ const SideMenu = () => {
 			<ul 
 				onMouseLeave={() => dispatch(sideMenuShow(false))}
 				className={sideMenuClasses}>
-					CHOOSE CATEGORY:
+					<div className='sideMenu__title'>CHOOSE CATEGORY:</div>
 				{items}
 			</ul>
 		)
