@@ -94,7 +94,7 @@ const AppHeader = () => {
 						<input 
 							className={inputClasses} 
 							id="headerInput"
-							placeholder={'введите поисковый запрос'} 
+							placeholder={'enter and push `search`'} 
 							name='search'
 							value={searchValue}
 							onChange={(e) => {

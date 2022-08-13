@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import { Provider } from 'react-redux';
+import { Rings } from  'react-loader-spinner'
+
 import store from '../../store/';
 
 import AppHeader from '../appHeader/AppHeader';
@@ -22,7 +24,20 @@ const App = () => {
 				<SideMenu/>
 				<AppHeader/>
 				<main className="main">
-					<Suspense fallback={'loading'}>
+					<Suspense fallback={
+						<Rings
+						height="300"
+						width="300"
+						color="black"
+						radius="6"
+						wrapperStyle={{
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+						}}
+						visible={true}
+						ariaLabel="rings-loading"/>
+						}>
 						<Routes>
 							<Route exact path='/' element={<MainPage/>}/>
 							<Route exact path='/article/:articleId' element={<SinglePage/>}/>

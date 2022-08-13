@@ -3,9 +3,8 @@ import LastestNews from "../lastestNews/LastestNews";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import {mainArticlesFetching, mainArticlesFetched, mainArticlesFetchingError} from '../../actions';
-
+import { Rings } from  'react-loader-spinner'
 import useNewsService from '../../services/NewsService';
-// import Spinner from "../spinner/spinner";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -28,7 +27,20 @@ const MainPage = () => {
 				<>
 					<HotTopic/>
 					<LastestNews/>
-				</> : 'loading'
+				</> : 
+				// 'loading'
+				<Rings
+					height="300"
+					width="300"
+					color="black"
+					radius="6"
+					wrapperStyle={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}
+					visible={true}
+					ariaLabel="rings-loading"/>
 			}
 		</>
 	);
